@@ -51,7 +51,7 @@ const Card = () => {
               dataArray.length;
 
             // Log 'sound' if the volume is above a certain threshold
-            if (averageVolume > 70) {
+            if (averageVolume > 60) {
               // Adjust threshold as needed
               setBlowCandle(true);
             }
@@ -79,14 +79,17 @@ const Card = () => {
           <div className="card">
             <div className="front">
               <div className="outside">
+                <div className={`${isOpen && "changeOpacity"}`}>
                 <h1>Happy Birthday!!!</h1>
                 <Image
                   src="/unicorn.png"
                   alt="light"
-                  width={150}
-                  height={150}
+                  width={180}
+                  height={180}
                   onTransitionEnd={handleTransitionEnd}
                 />
+
+                </div>
                 <p className="footnote">click to open</p>
               </div>
               <div className="inside"></div>
@@ -98,16 +101,16 @@ const Card = () => {
                     className={`${blowCandle && "changeOpacity"} cake-candle`}
                     src="/light.png"
                     alt="light"
-                    width={8}
-                    height={31}
+                    width={10}
+                    height={34}
                     onTransitionEnd={handleTransitionEnd}
                   />
                   <Image
                     src="/cake.png"
                     alt="cake"
                     className="cake"
-                    width={140}
-                    height={149}
+                    width={180}
+                    height={191}
                   />
                 <p onClick={() => setIsOpacityZero(true)} className="footnote">*Blow the candle or click here</p>
                 </div>
