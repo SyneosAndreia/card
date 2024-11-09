@@ -1,0 +1,103 @@
+:root {
+  --height: 600px;
+  --width: 300px;
+}
+
+h1 {
+  font-family: "Oleo Script", system-ui;
+  font-size: 65px;
+  color: #8B008B;
+}
+.cardContainer {
+  width: var(--width);
+  height: var(--height);
+  margin: 3rem auto;
+  transition: all 0.85s ease-in-out;
+}
+
+.card {
+  perspective: calc(4 * var(--height));
+  height: var(--height);
+  width: var(--width);
+  position: relative;
+  color: white;
+}
+
+.card > div,
+.card > div > div {
+  height: var(--height);
+  width: var(--width);
+  position: absolute;
+  border-radius: 0.25rem;
+}
+
+.card > div > div {
+  padding: 2rem;
+}
+
+.front {
+  transition-duration: 1.5s;
+  transform-origin: 0 0;
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+.front > div {
+  backface-visibility: hidden;
+}
+
+.outside,
+.inside {
+  background-image: url('/cardTexture.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.front .inside {
+  transform: rotateY(-180deg);
+}
+
+.back {
+  z-index: 1;
+}
+
+.back .inside {
+  border-left: 2px dotted darkgrey;
+}
+
+.open {
+  padding-left: var(--width);
+}
+
+.open .front {
+  transform: rotateY(-180deg);
+}
+
+p {
+  margin: 0 0 1.65rem 0;
+}
+
+.cake-comp {
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+.cake-candle {
+  position: absolute;
+  top: 9%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: opacity 1s ease;
+}
+.cake {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.changeOpacity {
+  opacity: 0; /* Candle fades out completely */
+}
