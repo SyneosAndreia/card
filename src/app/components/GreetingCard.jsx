@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SoundDetector from "./SoundDetector.jsx";
 import Image from "next/image";
+
+import ConfettiAnimation from './ConfettiAnimation.jsx'
 
 const Card = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ const Card = () => {
 
   const handleTransitionEnd = () => {
     if (blowCandle) {
-      setIsOpacityZero(true); 
+      setIsOpacityZero(true);
       console.log("Opacity is now zero!");
     }
   };
@@ -50,7 +51,7 @@ const Card = () => {
               dataArray.length;
 
             // Log 'sound' if the volume is above a certain threshold
-            if (averageVolume > 85) {
+            if (averageVolume > 70) {
               // Adjust threshold as needed
               setBlowCandle(true);
             }
@@ -69,57 +70,65 @@ const Card = () => {
   }, [isOpen]);
 
   return (
-    <div
-      className={`cardContainer ${isOpen ? "open" : ""}`}
-      onClick={toggleCard}
-    >
-      <div className="card">
-        <div className="front">
-          <div className="outside">
-            <p>
-              Greetings!
-              <br />
-              <br />
-              <small>(Card's cover)</small>
-            </p>
-          </div>
-          <div className="inside">
-            <p>
-              Hello xyz
-              <br />
-              <br />
-              <small>(Card - inside, top half)</small>
-            </p>
-          </div>
-        </div>
-        <div className="back">
-          <div className="inside">
-            <h1>Happy Birthday!!!</h1>
-            <div className="cake-comp">
-              <Image
-                className={`${blowCandle && "changeOpacity"} cake-candle`}
-                src="/light.png" 
-                alt="light"
-                width={8} 
-                height={31} 
-                onTransitionEnd={handleTransitionEnd}
-              />
-              <Image
-                src="/cake.png" 
-                alt="cake"
-                className="cake"
-                width={223}
-                height={238} 
-              />
+    <div className="mainComp">
+      <div className={`${isOpacityZero && "changeOpacity"}`}>
+        <div
+          className={`cardContainer ${isOpen ? "open" : ""}`}
+          onClick={toggleCard}
+        >
+          <div className="card">
+            <div className="front">
+              <div className="outside">
+                <h1>Happy Birthday!!!</h1>
+                <Image
+                  src="/unicorn.png"
+                  alt="light"
+                  width={150}
+                  height={150}
+                  onTransitionEnd={handleTransitionEnd}
+                />
+                <p className="footnote">click to open</p>
+              </div>
+              <div className="inside"></div>
+            </div>
+            <div className="back">
+              <div className="inside">
+                <div className="cake-comp">
+                  <Image
+                    className={`${blowCandle && "changeOpacity"} cake-candle`}
+                    src="/light.png"
+                    alt="light"
+                    width={8}
+                    height={31}
+                    onTransitionEnd={handleTransitionEnd}
+                  />
+                  <Image
+                    src="/cake.png"
+                    alt="cake"
+                    className="cake"
+                    width={140}
+                    height={149}
+                  />
+                <p onClick={() => setIsOpacityZero(true)} className="footnote">*Blow the candle or click here</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-
-      <div className="christmas-sec">
-
-
+      <div className={`christmas-sec ${isOpacityZero ? "zoom-in" : ""}`}>
+        <ConfettiAnimation />
+        <div className="christmas-card">
+          <h1 className="christmas-title">It's Time!!!!</h1>
+          <Image
+            src="/mariah.png"
+            alt="mariah"
+            className="mariah"
+            width={250}
+            height={333}
+          />
+        </div>
       </div>
     </div>
   );
